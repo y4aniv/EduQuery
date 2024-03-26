@@ -19,6 +19,15 @@ dataset = (pandas.read_csv("../assets/fr-en-annuaire-education.csv", sep=";")  #
            .replace({"type_etablissement": {"Ecole": "École"}})  # Remplacer "Ecole" par "École"
            .to_dict(orient="records"))  # Convertir les données en liste de dictionnaires
 
+# Traiter les erreurs et les exceptions
+@app.errorhandler(404)  # Gérer les erreurs 404 (Not Found)
+def page_not_found(error):  # Fonction pour gérer les erreurs 404
+    return {"error": "Not found"}, 404  # Retourner une erreur (HTTP 404 Not Found)
+
+@app.errorhandler(500)  # Gérer les erreurs 500 (Internal Server Error)
+def internal_server_error(error):  # Fonction pour gérer les erreurs 500
+    return {"error": "Internal server error"}, 500  # Retourner une erreur (HTTP 500 Internal Server Error)
+
 # Définir les routes de l'API REST
 @app.get("/api/filters")  # Route GET "/api/filters"
 def get_filters():
