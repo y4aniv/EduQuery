@@ -4,5 +4,4 @@ pandas
 flask
 flask-cors
 flask-compress
-io
 gunicorn
