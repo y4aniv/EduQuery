@@ -11,3 +11,9 @@ app = fl.Flask(__name__)  # Créer une instance de l'application Flask
 fl_cors(app, resources={r"/api/*": {"origins": "*"}})  # Activer les CORS pour l'API REST
 fl_compress(app)  # Activer la compression des réponses
 
+# Importer et formater les données du fichier CSV
+dataset = (pandas.read_csv("../assets/fr-en-annuaire-education.csv", sep=";")  # Lire le fichier CSV
+           .fillna("N/A")  # Remplacer les valeurs manquantes par "N/A"
+           .rename(str.lower, axis="columns")  # Mettre les noms des descripteurs en minuscules
+           .replace({"type_etablissement": {"Ecole": "École"}})  # Remplacer "Ecole" par "École"
+           .to_dict(orient="records"))  # Convertir les données en liste de dictionnaires
