@@ -19,7 +19,7 @@ dataset = (pandas.read_csv("../assets/fr-en-annuaire-education.csv", sep=";")  #
            .to_dict(orient="records"))  # Convertir les données en liste de dictionnaires
 
 # Définir les routes de l'API REST
-@app.get("/api/filters")
+@app.get("/api/filters")  # Route GET "/api/filters"
 def get_filters():
     """
     Récupérer les filtres de recherche.
