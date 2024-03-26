@@ -17,3 +17,16 @@ dataset = (pandas.read_csv("../assets/fr-en-annuaire-education.csv", sep=";")  #
            .rename(str.lower, axis="columns")  # Mettre les noms des descripteurs en minuscules
            .replace({"type_etablissement": {"Ecole": "École"}})  # Remplacer "Ecole" par "École"
            .to_dict(orient="records"))  # Convertir les données en liste de dictionnaires
+
+# Définir les routes de l'API REST
+@app.get("/api/filters")
+def get_filters():
+    """
+    Récupérer les filtres de recherche.
+    :return: Les filtres de recherche (dict)
+    """
+    return {  # Retourner les filtres de recherche (HTTP 200 OK)
+        "cities": list(set([entry["nom_commune"] for entry in dataset])),  # Récupérer les villes uniques dans le dataset
+        "types": list(set([entry["type_etablissement"] for entry in dataset])),  # Récupérer les types uniques dans le dataset
+        "status": list(set([entry["statut_public_prive"] for entry in dataset])),  # Récupérer les statuts uniques dans le dataset
+    }
