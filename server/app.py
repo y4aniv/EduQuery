@@ -157,3 +157,27 @@ def get_search():
         return fl.Response(csv.to_csv(index=False), mimetype="text/csv")  # Retourner les résultats au format CSV (HTTP 200 OK)
     else:  # Si le format de la réponse n'est pas supporté (JSON, GeoJSON, CSV)
         return {"error": "Unsupported format"}, 400  # Retourner une erreur (HTTP 400 Bad Request)
+
+@app.get("/api/streetview")  # Route GET "/api/streetview"
+def get_streetview():
+    """
+    Récupérer une image Street View.
+    :param(req) uai: L'identifiant de l'établissement (str).
+    :return: L'image Street View (bytes).
+    """
+    uai = fl.request.args.get("uai")  # Récupérer l'identifiant de l'établissement
+    if uai is None:  # Si l'identifiant de l'établissement est manquant
+        return {"error": "Missing UAI"}, 400  # Retourner une erreur (HTTP 400 Bad Request)
+
+    latitude = next((entry["latitude"] for entry in dataset if entry["identifiant_de_l_etablissement"].lower() == uai.lower()), None)  # Récupérer la latitude de l'établissement
+    longitude = next((entry["longitude"] for entry in dataset if entry["identifiant_de_l_etablissement"].lower() == uai.lower()), None)  # Récupérer la longitude de l'établissement
+
+    if latitude is None or longitude is None:  # Si les coordonnées de l'établissement sont manquantes
+        return fl.send_file("../assets/default-streetview.png", mimetype="image/png")  # Retourner une image par défaut (HTTP 200 OK)
+    else:  # Si les coordonnées de l'établissement sont disponibles
+        streetview_request = streetview.search_panoramas(latitude, longitude)  # Rechercher des images Street View
+        if len(streetview_request) > 0:  # Si des images Street View sont disponibles
+            streetview_image = requests.get(f"https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid={streetview_request[0].pano_id}&w=1920&h=1080&yaw=200.26704&pitch=0&thumbfov=100").content  # Récupérer l'image Street View avec une requête HTTP
+            return fl.send_file(io.BytesIO(streetview_image), mimetype="image/jpeg")  # Retourner l'image Street View (HTTP 200 OK)
+        else:  # Si aucune image Street View n'est disponible
+            return fl.send_file("../assets/default-streetview.png", mimetype="image/png")  # Retourner une image par défaut (HTTP 200 OK)
