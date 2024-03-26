@@ -181,3 +181,7 @@ def get_streetview():
             return fl.send_file(io.BytesIO(streetview_image), mimetype="image/jpeg")  # Retourner l'image Street View (HTTP 200 OK)
         else:  # Si aucune image Street View n'est disponible
             return fl.send_file("../assets/default-streetview.png", mimetype="image/png")  # Retourner une image par défaut (HTTP 200 OK)
+
+# Exécuter l'application Flask
+if __name__ == "__main__":
+    app.run()  # Lancer l'application Flask
