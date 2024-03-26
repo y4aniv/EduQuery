@@ -25,8 +25,8 @@ def get_filters():
     Récupérer les filtres de recherche.
     :return: Les filtres de recherche (dict)
     """
-    return {  # Retourner les filtres de recherche (HTTP 200 OK)
+    return fl.jsonify( {  # Retourner les filtres de recherche sous forme de JSON (HTTP 200 OK)
         "cities": list(set([entry["nom_commune"] for entry in dataset])),  # Récupérer les villes uniques dans le dataset
         "types": list(set([entry["type_etablissement"] for entry in dataset])),  # Récupérer les types uniques dans le dataset
         "status": list(set([entry["statut_public_prive"] for entry in dataset])),  # Récupérer les statuts uniques dans le dataset
-    }
+    })
