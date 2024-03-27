@@ -13,7 +13,7 @@ fl_cors(app, resources={r"/api/*": {"origins": "*"}})  # Activer les CORS pour l
 fl_compress(app)  # Activer la compression des réponses
 
 # Importer et formater les données du fichier CSV
-dataset = (pandas.read_csv("../assets/fr-en-annuaire-education.csv", sep=";")  # Lire le fichier CSV
+dataset = (pandas.read_csv("./assets/fr-en-annuaire-education.csv", sep=";")  # Lire le fichier CSV
            .fillna("N/A")  # Remplacer les valeurs manquantes par "N/A"
            .rename(str.lower, axis="columns")  # Mettre les noms des descripteurs en minuscules
            .replace({"type_etablissement": {"Ecole": "École"}})  # Remplacer "Ecole" par "École"
@@ -182,14 +182,14 @@ def get_streetview():
     longitude = next((entry["longitude"] for entry in dataset if entry["identifiant_de_l_etablissement"].lower() == uai.lower()), None)  # Récupérer la longitude de l'établissement
 
     if latitude is None or longitude is None:  # Si les coordonnées de l'établissement sont manquantes
-        return fl.send_file("../assets/default-streetview.png", mimetype="image/png")  # Retourner une image par défaut (HTTP 200 OK)
+        return fl.send_file("./assets/default-streetview.png", mimetype="image/png")  # Retourner une image par défaut (HTTP 200 OK)
     else:  # Si les coordonnées de l'établissement sont disponibles
         streetview_request = streetview.search_panoramas(latitude, longitude)  # Rechercher des images Street View
         if len(streetview_request) > 0:  # Si des images Street View sont disponibles
             streetview_image = requests.get(f"https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid={streetview_request[0].pano_id}&w=1920&h=1080&yaw=200.26704&pitch=0&thumbfov=100").content  # Récupérer l'image Street View avec une requête HTTP
             return fl.send_file(io.BytesIO(streetview_image), mimetype="image/jpeg")  # Retourner l'image Street View (HTTP 200 OK)
         else:  # Si aucune image Street View n'est disponible
-            return fl.send_file("../assets/default-streetview.png", mimetype="image/png")  # Retourner une image par défaut (HTTP 200 OK)
+            return fl.send_file("./assets/default-streetview.png", mimetype="image/png")  # Retourner une image par défaut (HTTP 200 OK)
 
 # Exécuter l'application Flask
 if __name__ == "__main__":
