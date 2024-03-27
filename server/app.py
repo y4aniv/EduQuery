@@ -68,7 +68,7 @@ def get_search():
     results = dataset  # Initialiser les résultats avec le dataset
     if query != "":  # Si le paramètre de recherche n'est pas vide
         results = [entry for entry in results if query.lower() in entry["nom_etablissement"].lower().replace("-", " ")]  # Chercher le nom de l'établissement en étant insensible à la casse et aux tirets
-    if city != "" or city != "null": # Si le paramètre de ville n'est pas vide
+    if city != "" and city != "null":  # Si le paramètre de ville n'est pas vide
         results = [entry for entry in results if city.lower() == entry["nom_commune"].lower()]  # Filtrer les résultats par ville
     if type != "all":  # Si le paramètre de type n'est pas "all"
         results = [entry for entry in results if type.lower() == entry["type_etablissement"].lower()]  # Filtrer les résultats par type
