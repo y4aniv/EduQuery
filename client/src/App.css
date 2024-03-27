@@ -33,3 +33,25 @@
     position: relative;
     width: 60%;
 }
+
+.App-ResultsContainer {
+    position: relative;
+    width: calc(100% - var(--spacing) * 2);
+    left: 50%;
+    transform: translateX(-50%);;
+    display: flex;
+    flex-direction: row;
+    margin-top: var(--spacing);
+    gap: var(--spacing);
+}
+
+.App-ResultsContainer-Map {
+    position: sticky;
+    width: 100%;
+    height: calc(100vh - var(--spacing) * 10);
+}
+
+.App-ResultsContainer-Results {
+    position: relative;
+    width: 100%;
+}
