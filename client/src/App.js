@@ -213,7 +213,8 @@ function App() {
                                 <CardMedia component="img" height="140"
                                            image={BASE_API_URL + `/streetview?uai=${result.uai}`}
                                            alt={result.name}
-                                           className="App-ResultsContainer-Results-List-Item-Image"/>
+                                           className="App-ResultsContainer-Results-List-Item-Image"
+                                           loading="lazy"/>
                                 <CardContent className="App-ResultsContainer-Results-List-Item-Content">
                                     <Typography gutterBottom variant="h5"
                                                 component="div">{capitalize.words(result.name)}</Typography>
