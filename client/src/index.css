@@ -1,18 +1,22 @@
 @import url('https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,301,701,300,501,401,901,400&display=swap');
 
 :root {
-  --spacing: 20px;
-  --font-family: 'Satoshi', sans-serif;
-  --border-radius: 5px;
+    --spacing: 20px;
+    --font-family: 'Satoshi', sans-serif;
+    --border-radius: 5px;
 }
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: var(--font-family) !important;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-family) !important;
 }
 
 .mapboxgl-control-container {
     display: none !important;
+}
+
+a {
+    color: inherit;
 }

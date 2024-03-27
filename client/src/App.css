@@ -26,6 +26,7 @@
     flex-direction: row;
     gap: var(--spacing);
 }
+
 .App-SearchContainer-Params-Filters {
     display: flex;
     flex-direction: column;
@@ -43,15 +44,105 @@
     flex-direction: row;
     margin-top: var(--spacing);
     gap: var(--spacing);
+    padding-bottom: var(--spacing);
+}
+
+.App-ResultsContainer-Results-Total {
+    display: flex;
+    gap: var(--spacing);
+}
+
+.App-ResultsContainer-Results-Total-Count {
+    position: relative;
+    width: 40%;
+}
+
+.App-ResultsContainer-Results-Total-Download {
+    position: relative;
+    width: 70%;
 }
 
 .App-ResultsContainer-Map {
-    position: sticky;
+    position: sticky !important;
     width: 100%;
-    height: calc(100vh - var(--spacing) * 10);
+    height: calc(100vh - var(--spacing) * 2);
+    top: var(--spacing);
+    border-radius: var(--border-radius);
 }
 
 .App-ResultsContainer-Results {
     position: relative;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing);
+}
+
+.App-ResultsContainer-Results-List-Item {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    gap: var(--spacing);
+}
+
+.App-ResultsContainer-Results-List-Item-Image {
+    position: relative;
+    width: 30% !important;
+    height: 100% !important;
+    object-fit: cover;
+    object-position: left;
+}
+
+.App-ResultsContainer-Results-List-Item-Content {
+    width: 100%;
+}
+
+.App-ResultsContainer-Results-List-Item-Chips {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: calc(var(--spacing) / 2);
+    margin-bottom: var(--spacing);
+}
+
+@media screen and (max-width: 900px) {
+    .App-SearchContainer-Params {
+        flex-direction: column;
+    }
+
+    .App-SearchContainer-Params-Filters {
+        width: 100%;
+    }
+
+    .App-ResultsContainer {
+        flex-direction: column-reverse;
+    }
+
+    .App-ResultsContainer-Results-Total {
+        flex-direction: column;
+    }
+
+    .App-ResultsContainer-Results-Total-Download {
+        width: 100%;
+    }
+
+    .App-ResultsContainer-Results-Total-Count {
+        width: 100%;
+    }
+
+    .App-ResultsContainer-Map {
+        position: relative !important;
+        width: 100%;
+        height: 50vh;
+        margin-bottom: var(--spacing);
+    }
+
+    .App-ResultsContainer-Results-List-Item {
+        flex-direction: column;
+    }
+
+    .App-ResultsContainer-Results-List-Item-Image {
+        width: 100% !important;
+        height: 20vh !important;
+    }
 }
