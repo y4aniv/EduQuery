@@ -21,6 +21,7 @@ import {FileDownload, Search} from '@mui/icons-material'
 import {useEffect, useRef, useState} from 'react'
 import mapboxgl from 'mapbox-gl'
 import capitalize from 'capitalize'
+import save
 
 function App() {
 
@@ -209,7 +210,7 @@ function App() {
                                         center: [result.longitude, result.latitude], zoom: 18
                                     })
                                 }
-                            }}>
+                            }} key={result.uai}>
                                 <CardMedia component="img" height="140"
                                            image={BASE_API_URL + `/streetview?uai=${result.uai}`}
                                            alt={result.name}
