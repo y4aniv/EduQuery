@@ -21,7 +21,6 @@ import {FileDownload, Search} from '@mui/icons-material'
 import {useEffect, useRef, useState} from 'react'
 import mapboxgl from 'mapbox-gl'
 import capitalize from 'capitalize'
-import save
 
 function App() {
 
