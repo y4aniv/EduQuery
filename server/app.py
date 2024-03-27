@@ -191,6 +191,14 @@ def get_streetview():
         else:  # Si aucune image Street View n'est disponible
             return fl.send_file("./assets/default-streetview.png", mimetype="image/png")  # Retourner une image par défaut (HTTP 200 OK)
 
+@app.get("/api/health")  # Route GET "/api/health"
+def get_health():
+    """
+    Vérifier la santé de l'API.
+    :return: L'état de santé de l'API (str).
+    """
+    return "OK"  # Retourner l'état de santé de l'API (HTTP 200 OK)
+
 # Exécuter l'application Flask
 if __name__ == "__main__":
     app.run()  # Lancer l'application Flask
