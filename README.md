@@ -3,6 +3,7 @@
     <h3>Moteur de recherche des établissements scolaires français</h3>
 </div>
 <br>
+
 ## Table des matières
 1. [Introduction](#introduction)
 2. [Installation](#installation)
